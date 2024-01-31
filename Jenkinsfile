@@ -37,7 +37,7 @@ pipeline {
         stage('Deploy') {
             agent any
             steps{
-                sh "docker run -d --name ccc --pull always jaromirb/ccc:$BUILD_NUMBER"
+                sh "docker run -d -p 8081:8081 --name ccc --pull always jaromirb/ccc:$BUILD_NUMBER"
             }
         }
     }
