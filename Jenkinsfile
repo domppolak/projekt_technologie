@@ -34,11 +34,12 @@ pipeline {
                 sh "docker rmi $registry:$BUILD_NUMBER"
             }
         }
-        stage('Deploy') {
-            agent any
-            steps{
-                sh "docker rm --force ccc"
-                sh "docker run -d -p 8081:8081 --name ccc  --network cc-n --pull always jaromirb/ccc:$BUILD_NUMBER"
+        withCredentials([sshUserPrivateKey(credentialsId: 'dockerb2', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+            remote.user = userName
+            remote.identityFile = identity
+            stage("Deploy") {
+                sshCommand remote: remote, command: 'docker rm -f ccc'
+                sshCommand remote: remote, command: 'docker run -d -p 8081:8081 --name ccc  --network cc-n --pull always jaromirb/ccc:$BUILD_NUMBER'
             }
         }
     }
