@@ -46,7 +46,7 @@ pipeline {
                         remote.allowAnyHosts = true
                         
                         // sshCommand remote: remote, command: 'docker rm -f ccc'
-                        sshCommand remote: remote, command: 'docker run -d -p 8081:8081 --name ccc  --network cc-n --pull always jaromirb/ccc:$BUILD_NUMBER'
+                        sshCommand remote: remote, command: "docker run -d -p 8081:8081 --name ccc  --network cc-n --pull always jaromirb/ccc:$BUILD_NUMBER"
             
                     }
                 }
