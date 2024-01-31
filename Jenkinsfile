@@ -8,7 +8,9 @@ pipeline {
     stages {
         stage('Cloning our Git') {
             steps {
-                git 'https://github.com/domppolak/projekt_technologie.git'
+                git branch: 'main', 
+                credentialsId: 'dominik', 
+                url: 'https://github.com/domppolak/projekt_technologie'
             }
         }
         stage('Building our image') {
