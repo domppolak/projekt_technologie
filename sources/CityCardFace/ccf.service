@@ -1,0 +1,11 @@
+[Unit]
+Description=CCF
+After=default.target
+
+[Service]
+User=vagrant
+WorkingDirectory=/home/vagrant/app
+ExecStart=npm run start
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,41 @@
+<mat-card class="w-64 h-96 min-w-fit min-h-fit items-center" [class.!bg-emerald-500]="isValid()" [class.!bg-gray-400]="isInvalid()" [class.!bg-blue-500]="isValidatedSingleTicket()">
+    <mat-card-header class="flex-row w-full shrink-0" *ngIf="ticket.type=='SEASON'">
+        <span class="material-symbols-outlined">calendar_month</span>
+        <div class="flex justify-center shrink grow w-40">
+            <span>Season pass</span>
+        </div>
+    </mat-card-header>
+    <mat-card-header class="flex-row w-full shrink-0" *ngIf="ticket.type=='TIMED'">
+        <span class="material-symbols-outlined">schedule</span>
+        <div class="flex justify-center shrink grow w-40">
+            <span>Timed ticket</span>
+        </div>
+    </mat-card-header>
+    <mat-card-header class="flex-row w-full shrink-0" *ngIf="ticket.type=='SINGLE'">
+        <span class="material-symbols-outlined">arrow_forward</span>
+        <div class="flex justify-center shrink grow w-40">
+            <span>Single-fare ticket</span>
+        </div>
+    </mat-card-header>
+    <mat-card-content class="w-full h-full shrink flex flex-col">
+        <div *ngIf="isValidatedSingleTicket()">Recently validated</div>
+        <div *ngIf="isInvalid()">Expired</div>
+        <div *ngIf="isNotYetValidated()">Available</div>
+        <div *ngIf="isValid()">Valid</div>
+        <div class="flex flex-row" *ngIf="ticket.duration">
+            <mat-icon>timelapse</mat-icon>
+            <div class="p-0.5 ml-1">{{formatDuration(ticket.duration)}}</div>
+        </div>
+        <div class="flex flex-row" *ngIf="ticket.start">
+            <mat-icon>event_upcoming</mat-icon>
+            <div class="p-0.5 ml-1">{{ticket.type == "SEASON"?ticket.start.toLocaleDateString():ticket.start.toLocaleTimeString()}}</div>
+        </div>
+        <div class="flex flex-row" *ngIf="ticket.end">
+            <mat-icon>event_busy</mat-icon>
+            <div class="p-0.5 ml-1">{{ticket.type == "SEASON"?ticket.end.toLocaleDateString():ticket.end.toLocaleTimeString()}}</div>
+        </div>
+    </mat-card-content>
+    <mat-card-footer class="text-slate-200 bg-slate-700 w-full text-center">
+        {{ticket.id}}
+    </mat-card-footer>
+</mat-card>

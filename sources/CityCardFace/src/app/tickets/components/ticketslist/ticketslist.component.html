@@ -1,0 +1,12 @@
+<div class="inline-block align-middle m-2">
+  <mat-button-toggle-group name="filter" aria-label="Ticket filter" (valueChange)="changeFilter($event)">
+    <mat-button-toggle value="all">All</mat-button-toggle>
+    <mat-button-toggle value="SINGLE">Single</mat-button-toggle>
+    <mat-button-toggle value="TIMED">Timed</mat-button-toggle>
+    <mat-button-toggle value="SEASON">Season</mat-button-toggle>
+  </mat-button-toggle-group>
+</div>
+  <p class="bg-slate-800 w-full p-4 flex flex-row flex-wrap gap-4">
+    <a [routerLink]="['/buy']" [queryParams]="filter=='all' ? {} : {type: filter}"><ccf-pluscard/></a>
+    <ccf-ticket *ngFor="let ticket of visibleTickets()" [ticket]="ticket"/>
+</p>

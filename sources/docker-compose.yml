@@ -1,0 +1,16 @@
+services:
+  angular:
+    build:
+      context: ./CityCardFace
+    ports:
+      - "4200:4200"
+    profiles:
+      - frontend
+
+  spring:
+    build:
+      context: ./CityCardCore
+    ports:
+      - "8081:8081"
+    profiles:
+      - backend

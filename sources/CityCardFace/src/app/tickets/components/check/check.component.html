@@ -1,0 +1,15 @@
+<form [formGroup]="checkForm" (ngSubmit)="onSubmit()" class="flex flex-col bg-slate-800 p-8 w-full text-slate-100 max-w-2xl">
+    <h2 class="block text-slate-100 !ml-2">Check a ticket</h2>
+    <mat-form-field class="grow">
+        <mat-label>Vehicle Id</mat-label>
+        <input matInput type="text" #vehicleIdInput formControlName="vehicleId"/>
+        <mat-error>Required</mat-error>
+    </mat-form-field>
+    <mat-form-field class="grow">
+        <mat-label>Ticket Id</mat-label>
+        <input matInput type="text" #ticketIdInput formControlName="ticketId"/>
+        <mat-error>Required</mat-error>
+    </mat-form-field>
+    <button type="submit" mat-raised-button color="accent" class="m-4" [disabled]="!checkForm.valid">Check</button>
+</form>
+<input type="text" [formControl]="resultControl">

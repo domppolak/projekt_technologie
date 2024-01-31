@@ -1,0 +1,36 @@
+<form [formGroup]="buyForm" (ngSubmit)="onSubmit()" class="flex flex-col bg-slate-800 p-8 w-full text-slate-100 max-w-2xl">
+  <h2 class="block text-slate-100 !ml-2">Buy a ticket</h2>
+  <mat-button-toggle-group name="type" aria-label="Ticket type" #typeGroup="matButtonToggleGroup" class="w-fit mx-auto mb-6" (valueChange)="changeType($event)" formControlName="type">
+    <mat-button-toggle value="SINGLE">Single</mat-button-toggle>
+    <mat-button-toggle value="TIMED">Timed</mat-button-toggle>
+    <mat-button-toggle value="SEASON">Season</mat-button-toggle>
+  </mat-button-toggle-group>
+  <mat-button-toggle-group name="fare" value="FULL" aria-label="Fare" #fareGroup="matButtonToggleGroup" class="w-fit mx-auto mb-6" formControlName="fare">
+    <mat-button-toggle value="FULL">Full</mat-button-toggle>
+    <mat-button-toggle value="HALF">Half</mat-button-toggle>
+  </mat-button-toggle-group>
+  <fieldset *ngIf="this.type=='TIMED'" class="flex flex-row align-items">
+    <mat-slider min="15" max="120" step="15" discrete showTickMarks [displayWith]="formatDuration" class="grow">
+        <input matSliderThumb (valueChange)="durationChanged($event)" formControlName="duration">
+    </mat-slider>
+    <div class="inline w-10 h-10 text-center align-middle">{{formattedDuration}}</div>
+  </fieldset>
+  <fieldset class="flex flex-row justify-center align-items" *ngIf="this.type=='SEASON'">
+    <mat-form-field class="grow">
+      <mat-label>from</mat-label>
+      <input matInput [matDatepicker]="startDate" formControlName="startDate">
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="startDate"></mat-datepicker-toggle>
+      <mat-datepicker #startDate></mat-datepicker>
+    </mat-form-field>
+    <div class="align-middle m-4">-</div>
+    <mat-form-field class="grow">
+      <mat-label>to</mat-label>
+      <input matInput [matDatepicker]="endDate" formControlName="endDate">
+      <mat-hint>DD/MM/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="endDate"></mat-datepicker-toggle>
+      <mat-datepicker #endDate></mat-datepicker>
+    </mat-form-field>
+  </fieldset>
+  <button type="submit" mat-raised-button color="accent" class="m-4" [disabled]="!buyForm.valid">Buy</button>
+</form>
