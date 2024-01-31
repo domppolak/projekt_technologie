@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Cloning our Git') {
             steps {
-                git 'https://github.com/pwr-twwo/ci-cd-environment-sro11-3.git'
+                git 'git@github.com:domppolak/projekt_technologie.git'
             }
         }
         stage('Building our image') {
