@@ -45,7 +45,7 @@ pipeline {
                         remote.host = 'ec2-44-211-218-110.compute-1.amazonaws.com'
                         remote.allowAnyHosts = true
                         
-                        // sshCommand remote: remote, command: 'docker rm -f ccc'
+                        sshCommand remote: remote, command: "docker rm -f ccc"
                         sshCommand remote: remote, command: "docker run -d -p 8081:8081 --name ccc  --network cc-n --pull always jaromirb/ccc:$BUILD_NUMBER"
             
                     }
