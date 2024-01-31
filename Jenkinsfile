@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Cloning our Git') {
             steps {
-                git 'git@github.com:domppolak/projekt_technologie.git'
+                git 'https://github.com/domppolak/projekt_technologie.git'
             }
         }
         stage('Building our image') {
