@@ -3,6 +3,7 @@ pipeline {
         registry = "jaromirb/ccc"
         registryCredential = 'dockerhub_id'
         dockerImage = ''
+        remote = [:]
     }
     agent { label 'docker-build' }
     stages {
