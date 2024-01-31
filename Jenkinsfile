@@ -3,7 +3,6 @@ pipeline {
         registry = "jaromirb/ccc"
         registryCredential = 'dockerhub_id'
         dockerImage = ''
-        remote = [:]
     }
     agent { label 'docker-build' }
     stages {
@@ -39,6 +38,8 @@ pipeline {
             steps{
                 script{
                     withCredentials([sshUserPrivateKey(credentialsId: 'dockerb2', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'userName')]) {
+                        def remote = [:]
+                        remote.name = "run"
                         remote.user = userName
                         remote.identityFile = identity
                         remote.host = 'ec2-44-211-218-110.compute-1.amazonaws.com'
